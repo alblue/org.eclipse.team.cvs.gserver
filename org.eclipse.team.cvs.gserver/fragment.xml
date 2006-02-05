@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<fragment
+   plugin-id=""
+   plugin-version="">
+   <extension
+         id="gserver"
+         point="org.eclipse.team.cvs.core.connectionmethods">
+      <adapter>
+         <run
+               class="org.eclipse.team.internal.ccvs.core.connection.GServerConnectionMethod">
+            <parameter
+                  name="trace"
+                  value="false">
+            </parameter>
+         </run>
+      </adapter>
+   </extension>
+</fragment>
