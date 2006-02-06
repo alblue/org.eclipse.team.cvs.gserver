@@ -130,8 +130,16 @@ javax.security.auth.login.LoginException: KrbException: KDC has no support for e
   Value Name: allowtgtsessionkey
   Value Type: REG_DWORD
   Value: 0x01
-  
 
+Debug output is printed during login
+  It's still in development, so expect some stuff to be dumped to the console. If you're reporting any problems,
+  please include any output generated along with the error(s) displayed by the CVS console. Also, have a look
+  in the .log file for more details.   
+
+Whilst I am donating this to Eclipse.org and have used the org.eclipse package, this is only because the CVS
+server requires that package for most of the internals. It's not supported by Eclipse yet, although I hope it
+will be someday. If reporting information on the Eclispe bug noted above doesn't work, then please feel free
+to mail me at the address below, until such time as it gets adopted by Eclipse.org.
 
 Alex Blewitt
 Alex.Blewitt@gmail.com
