@@ -45,7 +45,6 @@ public class GServerConnection implements IServerConnection {
 	private static final String NO_SUCH_USER = "no such user";//$NON-NLS-1$
 	/** Communication strings */
 	private static final String BEGIN = "BEGIN GSSAPI REQUEST";//$NON-NLS-1$
-	private static final String END = "END GSSAPI REQUEST";//$NON-NLS-1$
 	private static final String LOGIN_OK = "I LOVE YOU";//$NON-NLS-1$
 	private static final String LOGIN_FAILED = "I HATE YOU";//$NON-NLS-1$
 	private ICVSRepositoryLocation cvsroot;
@@ -194,15 +193,16 @@ public class GServerConnection implements IServerConnection {
 			throws IOException, CVSAuthenticationException {
 		try {
 			System.setProperty("javax.security.auth.useSubjectCredsOnly", "false");//$NON-NLS-1$ $NON-NLS-2$
-			try {
-				// This will generate the kerberos ticket for us if we don't have it
-				LoginContext lc = new LoginContext("Eclipse",authenticator);//$NON-NLS-1$
-				System.err.println("Trying to log in");
-				lc.login();
-				System.err.println("Logged in");
-			} catch (LoginException e) {
-				throw new CVSAuthenticationException("Problem logging in",CVSAuthenticationException.RETRY,e);
-			}
+//			try {
+//				// This will generate the kerberos ticket for us if we don't have it
+//				// TODO Finish this so that it works
+//				LoginContext lc = new LoginContext("Eclipse",authenticator);//$NON-NLS-1$
+//				System.err.println("Trying to log in");
+//				lc.login();
+//				System.err.println("Logged in");
+//			} catch (LoginException e) {
+//				throw new CVSAuthenticationException("Problem logging in",CVSAuthenticationException.RETRY,e);
+//			}
 			GSSManager manager = GSSManager.getInstance();
 			Oid kerberos5  = new Oid("1.2.840.113554.1.2.2");//$NON-NLS-1$
 			GSSName cvsSlashServer = manager.createName("cvs/" + cvsroot.getHost(),null);//$NON-NLS-1$
@@ -239,7 +239,7 @@ public class GServerConnection implements IServerConnection {
 		out.flush();
 		int len = (in.read() << 8) | in.read();
 		byte[] inToken = new byte[len];
-		// TODO Read token fully properly
+		// TODO Read token fully properly - this may only load some of it
 		if (len != in.read(inToken, 0, len))
 			throw new RuntimeException("Failed to load complete token");
 		return inToken;
